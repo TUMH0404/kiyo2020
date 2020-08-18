@@ -7,37 +7,17 @@ function onOpen(){
   menu.addItem("作成",'main');
   
   menu.addSeparator();
-  var string0 =" ";
-  var string1 = " ︎";
-  var s1 = true;
-  var s2 = true;
-  if(s1==true){
-  string0 ="✔︎";
-  string1 = "✔︎";
-  }
-  else{
-  string0 ="✔︎";
-  string1 ="✔︎";
-  }
+
   menu.addSubMenu(         
       ui.createMenu("解答受付")  
-      .addItem(string1+"受付開始","permission").addItem(string0+"受付終了","reject")  
+      .addItem("受付開始","permission").addItem("受付終了","reject")  
   );
    menu.addSeparator();
-  var string2 =" ";
-  var string3 = " ︎";
-   if(s2==true){
-  string2 ="✔︎";
-  string3 = "✔︎";
-  }
-  else{
-  string2 ="✔︎";
-  string3 ="✔︎";
-  }
+
   
    menu.addSubMenu(    
       ui.createMenu("共有")   
-      .addItem(string3+"共有on","Vieweron").addItem(string2+"共有off","Vieweroff")    
+      .addItem("共有on","Vieweron").addItem("共有off","Vieweroff")    
   ); 
   menu.addSeparator();
   menu.addSubMenu(                          
@@ -59,10 +39,14 @@ function Initialize() {
   var doc = DocumentApp.getActiveDocument();
   var body = doc.getBody();
   var para = body.getParagraphs();
-  var drivename = para[0].getText().slice(20).trim();
-  var studentsfilename = para[1].getText().slice(12).trim();
-  var quizsheet = para[2].getText().slice(17).trim();
-  var quiznumber = para[3].getText().slice(14).trim();
+  var drivename = para[0].getText().slice(para[0].getText().indexOf("#")+1).trim();
+  var studentsfilename = para[1].getText().slice(para[1].getText().indexOf("#")+1).trim();
+  var quizsheet = para[2].getText().slice(para[2].getText().indexOf("#")+1).trim();
+  var quiznumber = para[3].getText().slice(para[3].getText().indexOf("#")+1).trim();
+//  Logger.log(drivename);
+//  Logger.log(studentsfilename);
+//  Logger.log(quizsheet);
+//  Logger.log(Number(quiznumber));
   return [drivename,studentsfilename,quizsheet,Number(quiznumber)];
   
 }
